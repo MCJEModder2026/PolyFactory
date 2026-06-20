@@ -23,12 +23,12 @@ public class PolydexTextures {
         var t1 = polydexBackground("1");
         var t2 = polydexBackground("2");
         var t3 = polydexBackground("3");
-        PRESS = t0.getA();
-        MIXER = t0.getB();
-        GRINDER = t1.getA();
-        SMELTERY = t1.getB();
-        DRAIN = t2.getA();
-        SPOUT = t2.getB();
-        PRESS_FLUID = t3.getA();
+        PRESS = t0.getFirst();
+        MIXER = t0.getSecond();
+        GRINDER = t1.getFirst();
+        SMELTERY = t1.getSecond();
+        DRAIN = t2.getFirst();
+        SPOUT = t2.getSecond();
+        PRESS_FLUID = t3.getFirst();
     }
 }

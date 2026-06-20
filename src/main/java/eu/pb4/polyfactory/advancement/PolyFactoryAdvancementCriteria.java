@@ -2,7 +2,7 @@ package eu.pb4.polyfactory.advancement;
 
 import static eu.pb4.polyfactory.ModInit.id;
 
-import net.minecraft.advancements.CriterionTrigger;
+import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 

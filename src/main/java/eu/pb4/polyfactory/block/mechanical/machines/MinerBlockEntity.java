@@ -246,7 +246,7 @@ public class MinerBlockEntity extends LockableBlockEntity implements SingleStack
             stateFront = world.getBlockState(blockPos);
         }
 
-        var centered = pos.getCenter();
+        var centered = Vec3.atCenterOf(pos);
 
         var entities = world.getEntitiesOfClass(Entity.class, AABB.encapsulatingFullBlocks(pos, blockPos), Entity::isPickable);
         entities.sort(Comparator.comparingDouble(x -> x.position().distanceToSqr(centered)));

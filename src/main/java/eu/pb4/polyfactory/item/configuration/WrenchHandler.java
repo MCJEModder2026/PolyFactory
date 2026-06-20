@@ -26,6 +26,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.network.chat.numbers.BlankFormat;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
@@ -185,7 +186,7 @@ public class WrenchHandler {
                                 var diff = ((BlockValueFormatter<Object>) action.formatter()).getDisplayValue(diffMap.get(action.id()), player.level(), blockHitResult.getBlockPos(), blockHitResult.getDirection(), state);
                                 b.add(t, Component.empty().append(valueFrom).append(Component.literal(" -> ").withStyle(ChatFormatting.GOLD)).append(diff).withStyle(ChatFormatting.YELLOW));
                             } else {
-                                b.add(t.withStyle(ChatFormatting.GRAY), Component.empty().append(valueFrom).withColor(ARGB.scaleRGB(ChatFormatting.YELLOW.getColor(), 0.7f)));
+                                b.add(t.withStyle(ChatFormatting.GRAY), Component.empty().append(valueFrom).withColor(ARGB.scaleRGB(TextColor.YELLOW.getValue(), 0.7f)));
                             }
                         }
                     });
@@ -269,7 +270,7 @@ public class WrenchHandler {
                                 var diff = action.formatter().getDisplayValue(diffMap.get(action.id()), entity, entityHitResult.getLocation());
                                 b.add(t, Component.empty().append(valueFrom).append(Component.literal(" -> ").withStyle(ChatFormatting.GOLD)).append(diff).withStyle(ChatFormatting.YELLOW));
                             } else {
-                                b.add(t.withStyle(ChatFormatting.GRAY), Component.empty().append(valueFrom).withColor(ARGB.scaleRGB(ChatFormatting.YELLOW.getColor(), 0.7f)));
+                                b.add(t.withStyle(ChatFormatting.GRAY), Component.empty().append(valueFrom).withColor(ARGB.scaleRGB(TextColor.YELLOW.getValue(), 0.7f)));
                             }
                         }
                     });

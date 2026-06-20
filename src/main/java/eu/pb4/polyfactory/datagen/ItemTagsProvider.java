@@ -1,6 +1,7 @@
 package eu.pb4.polyfactory.datagen;
 
 import eu.pb4.polyfactory.ModInit;
+import eu.pb4.polyfactory.item.FactoryItemIds;
 import eu.pb4.polyfactory.item.FactoryItemTags;
 import eu.pb4.polyfactory.item.FactoryItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -9,6 +10,7 @@ import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.tags.TagAppender;
+import net.minecraft.references.ItemIds;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -24,123 +26,123 @@ public class ItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider arg) {
-        this.getOrCreateTagBuilder(FactoryItemTags.ALLOWED_IN_MINER)
+        this.tag(FactoryItemTags.ALLOWED_IN_MINER)
                 .addOptionalTag(ConventionalItemTags.TOOLS)
-                .add(FactoryItems.STEEL_GEAR)
+                .add(FactoryItemIds.STEEL_GEAR)
                 .addOptionalTag(FactoryItemTags.DRILL_HEADS)
         ;
 
-        this.getOrCreateTagBuilder(FactoryItemTags.DRILL_HEADS)
-                .add(FactoryItems.IRON_DRILL_HEAD)
-                .add(FactoryItems.COPPER_DRILL_HEAD)
-                .add(FactoryItems.GOLDEN_DRILL_HEAD)
-                .add(FactoryItems.DIAMOND_DRILL_HEAD)
-                .add(FactoryItems.NETHERITE_DRILL_HEAD)
+        this.tag(FactoryItemTags.DRILL_HEADS)
+                .add(FactoryItemIds.IRON_DRILL_HEAD)
+                .add(FactoryItemIds.COPPER_DRILL_HEAD)
+                .add(FactoryItemIds.GOLDEN_DRILL_HEAD)
+                .add(FactoryItemIds.DIAMOND_DRILL_HEAD)
+                .add(FactoryItemIds.NETHERITE_DRILL_HEAD)
         ;
 
-        this.getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE)
+        this.tag(ItemTags.DURABILITY_ENCHANTABLE)
                 .addOptionalTag(FactoryItemTags.DRILL_HEADS);
-        this.getOrCreateTagBuilder(ItemTags.MINING_ENCHANTABLE)
+        this.tag(ItemTags.MINING_ENCHANTABLE)
                 .addOptionalTag(FactoryItemTags.DRILL_HEADS);
-        this.getOrCreateTagBuilder(ItemTags.MINING_LOOT_ENCHANTABLE)
+        this.tag(ItemTags.MINING_LOOT_ENCHANTABLE)
                 .addOptionalTag(FactoryItemTags.DRILL_HEADS);
 
-        this.getOrCreateTagBuilder(FactoryItemTags.ALLOWED_IN_PLANTER)
+        this.tag(FactoryItemTags.ALLOWED_IN_PLANTER)
                 .addOptionalTag(ItemTags.VILLAGER_PLANTABLE_SEEDS)
                 .addOptionalTag(ItemTags.SAPLINGS)
                 .addOptionalTag(ConventionalItemTags.SEEDS)
         ;
 
-        this.getOrCreateTagBuilder(ConventionalItemTags.DYES)
-                .add(FactoryItems.ARTIFICIAL_DYE)
+        this.tag(ConventionalItemTags.DYES)
+                .add(FactoryItemIds.ARTIFICIAL_DYE)
         ;
 
-        this.getOrCreateTagBuilder(ConventionalItemTags.RANGED_WEAPON_TOOLS)
-                .add(FactoryItems.PRESSURE_FLUID_GUN)
+        this.tag(ConventionalItemTags.RANGED_WEAPON_TOOLS)
+                .add(FactoryItemIds.PRESSURE_FLUID_GUN)
         ;
 
-        this.getOrCreateTagBuilder(ConventionalItemTags.NUGGETS)
-                .add(FactoryItems.STEEL_NUGGET)
+        this.tag(ConventionalItemTags.NUGGETS)
+                .add(FactoryItemIds.STEEL_NUGGET)
         ;
-        this.getOrCreateTagBuilder(ConventionalItemTags.INGOTS)
-                .add(FactoryItems.STEEL_INGOT)
-        ;
-
-        this.getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE)
-                .add(FactoryItems.PRESSURE_FLUID_GUN)
+        this.tag(ConventionalItemTags.INGOTS)
+                .add(FactoryItemIds.STEEL_INGOT)
         ;
 
-        this.getOrCreateTagBuilder(ItemTags.VANISHING_ENCHANTABLE)
-                .add(FactoryItems.PRESSURE_FLUID_GUN)
+        this.tag(ItemTags.DURABILITY_ENCHANTABLE)
+                .add(FactoryItemIds.PRESSURE_FLUID_GUN)
         ;
 
-        this.getOrCreateTagBuilder(ItemTags.CAULDRON_CAN_REMOVE_DYE)
-                .add(FactoryItems.WINDMILL_SAIL);
+        this.tag(ItemTags.VANISHING_ENCHANTABLE)
+                .add(FactoryItemIds.PRESSURE_FLUID_GUN)
+        ;
 
-        var x = this.getOrCreateTagBuilder(FactoryItemTags.ROOT_ADVANCEMENT);
-        for (var item : BuiltInRegistries.ITEM.keySet()) {
-            if (item.getNamespace().equals(ModInit.ID)) {
-                x.add(BuiltInRegistries.ITEM.getValue(item));
+        this.tag(ItemTags.CAULDRON_CAN_REMOVE_DYE)
+                .add(FactoryItemIds.WINDMILL_SAIL);
+
+        var x = this.tag(FactoryItemTags.ROOT_ADVANCEMENT);
+        for (var item : BuiltInRegistries.ITEM.registryKeySet()) {
+            if (item.identifier().getNamespace().equals(ModInit.ID)) {
+                x.add(item);
             }
         }
 
-        this.getOrCreateTagBuilder(FactoryItemTags.PLACER_USABLE)
+        this.tag(FactoryItemTags.PLACER_USABLE)
                 .addOptionalTag(ConventionalItemTags.TOOLS)
                 .addOptionalTag(ConventionalItemTags.EMPTY_BUCKETS)
                 .addOptionalTag(ConventionalItemTags.WATER_BUCKETS)
                 .addOptionalTag(ConventionalItemTags.LAVA_BUCKETS)
                 .addOptionalTag(ConventionalItemTags.BUCKETS)
                 .addOptionalTag(ConventionalItemTags.DYES)
-                .add(Items.SHEARS)
-                .add(Items.BOWL)
-                .add(FactoryItems.WINDMILL_SAIL, FactoryItems.STEEL_GEAR, FactoryItems.LARGE_STEEL_GEAR)
-                .add(FactoryItems.PORTABLE_REDSTONE_TRANSMITTER, FactoryItems.SPRAY_CAN, FactoryItems.DYNAMITE)
-                .add(Items.END_CRYSTAL, Items.ENDER_EYE, Items.EXPERIENCE_BOTTLE, Items.GLASS_BOTTLE, Items.POTION, Items.WHEAT)
+                .add(ItemIds.SHEARS)
+                .add(ItemIds.BOWL)
+                .add(FactoryItemIds.WINDMILL_SAIL, FactoryItemIds.STEEL_GEAR, FactoryItemIds.LARGE_STEEL_GEAR)
+                .add(FactoryItemIds.PORTABLE_REDSTONE_TRANSMITTER, FactoryItemIds.SPRAY_CAN, FactoryItemIds.DYNAMITE)
+                .add(ItemIds.END_CRYSTAL, ItemIds.ENDER_EYE, ItemIds.EXPERIENCE_BOTTLE, ItemIds.GLASS_BOTTLE, ItemIds.POTION, ItemIds.WHEAT)
         ;
 
-        this.getOrCreateTagBuilder(FactoryItemTags.XP_CONVERSION_CATALYST)
-                .add(Items.ECHO_SHARD);
-        this.getOrCreateTagBuilder(FactoryItemTags.DRAIN_CATALYST)
+        this.tag(FactoryItemTags.XP_CONVERSION_CATALYST)
+                .add(ItemIds.ECHO_SHARD);
+        this.tag(FactoryItemTags.DRAIN_CATALYST)
                 .addOptionalTag(FactoryItemTags.XP_CONVERSION_CATALYST);
 
-        this.getOrCreateTagBuilder(FactoryItemTags.PIPES)
-                .add(FactoryItems.PIPE);
+        this.tag(FactoryItemTags.PIPES)
+                .add(FactoryItemIds.PIPE);
 
         for (var mold : FactoryItems.MOLDS) {
             mold.createTag(this);
         }
 
-        this.getOrCreateTagBuilder(FactoryItemTags.SPOUT_ITEM_HORIZONTAL).addOptionalTag(FactoryItemTags.MOLDS);
-        this.getOrCreateTagBuilder(FactoryItemTags.CASTING_SMALL_FLUID).addOptionalTag(FactoryItemTags.MOLDS);
+        this.tag(FactoryItemTags.SPOUT_ITEM_HORIZONTAL).addOptionalTag(FactoryItemTags.MOLDS);
+        this.tag(FactoryItemTags.CASTING_SMALL_FLUID).addOptionalTag(FactoryItemTags.MOLDS);
 
-        this.getOrCreateTagBuilder(FactoryItemTags.MOLD_SHAPE_BOTTLE)
-                .add(Items.GLASS_BOTTLE)
-                .add(Items.POTION)
-                .add(Items.EXPERIENCE_BOTTLE)
-                .add(Items.HONEY_BOTTLE)
+        this.tag(FactoryItemTags.MOLD_SHAPE_BOTTLE)
+                .add(ItemIds.GLASS_BOTTLE)
+                .add(ItemIds.POTION)
+                .add(ItemIds.EXPERIENCE_BOTTLE)
+                .add(ItemIds.HONEY_BOTTLE)
         ;
 
-        this.getOrCreateTagBuilder(FactoryItemTags.MOLD_SHAPE_THROWABLE_BOTTLE)
-                .add(Items.SPLASH_POTION)
-                .add(FactoryItems.THROWABLE_GLASS_BOTTLE)
+        this.tag(FactoryItemTags.MOLD_SHAPE_THROWABLE_BOTTLE)
+                .add(ItemIds.SPLASH_POTION)
+                .add(FactoryItemIds.THROWABLE_GLASS_BOTTLE)
         ;
 
-        this.getOrCreateTagBuilder(FactoryItemTags.MOLD_SHAPE_BRITTLE_BOTTLE)
-                .add(Items.OMINOUS_BOTTLE)
-                .add(FactoryItems.BRITTLE_GLASS_BOTTLE)
-                .add(FactoryItems.BRITTLE_POTION)
+        this.tag(FactoryItemTags.MOLD_SHAPE_BRITTLE_BOTTLE)
+                .add(ItemIds.OMINOUS_BOTTLE)
+                .add(FactoryItemIds.BRITTLE_GLASS_BOTTLE)
+                .add(FactoryItemIds.BRITTLE_POTION)
         ;
 
-        this.getOrCreateTagBuilder(FactoryItemTags.GLASS_BOTTLE_MELTABLE)
-                .add(Items.GLASS_BOTTLE)
-                .add(FactoryItems.THROWABLE_GLASS_BOTTLE)
-                .add(FactoryItems.BRITTLE_GLASS_BOTTLE)
-                .add(FactoryItems.LINGERING_THROWABLE_GLASS_BOTTLE)
+        this.tag(FactoryItemTags.GLASS_BOTTLE_MELTABLE)
+                .add(ItemIds.GLASS_BOTTLE)
+                .add(FactoryItemIds.THROWABLE_GLASS_BOTTLE)
+                .add(FactoryItemIds.BRITTLE_GLASS_BOTTLE)
+                .add(FactoryItemIds.LINGERING_THROWABLE_GLASS_BOTTLE)
         ;
     }
 
 
-    public TagAppender<Item, Item> getOrCreateTagBuilder(TagKey<Item> tag) {
-        return super.valueLookupBuilder(tag);
+    public TagAppender<Item> tag(TagKey<Item> tag) {
+        return super.tag(tag);
     }
 }

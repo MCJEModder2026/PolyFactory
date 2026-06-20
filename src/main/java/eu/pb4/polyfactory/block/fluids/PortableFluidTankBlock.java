@@ -131,7 +131,7 @@ public class PortableFluidTankBlock extends Block implements FactoryBlock, PipeC
 
     @Override
     public BlockState getPolymerBreakEventBlockState(BlockState state, PacketContext context) {
-        return Blocks.COPPER_BLOCK.defaultBlockState();
+        return Blocks.COPPER_BLOCK.weathering().unaffected().defaultBlockState();
     }
 
     @Override

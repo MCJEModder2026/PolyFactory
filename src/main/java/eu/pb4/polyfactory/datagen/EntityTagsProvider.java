@@ -1,12 +1,14 @@
 package eu.pb4.polyfactory.datagen;
 
-import eu.pb4.polyfactory.entity.FactoryEntities;
+import eu.pb4.polyfactory.entity.FactoryEntityIds;
 import eu.pb4.polyfactory.entity.FactoryEntityTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypeIds;
+
 import java.util.concurrent.CompletableFuture;
 
 class EntityTagsProvider extends FabricTagsProvider.EntityTypeTagsProvider {
@@ -16,24 +18,24 @@ class EntityTagsProvider extends FabricTagsProvider.EntityTypeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider arg) {
-        this.valueLookupBuilder(FactoryEntityTags.GRID_PASSABLE)
+        this.tag(FactoryEntityTags.GRID_PASSABLE)
                 .addOptionalTag(EntityTypeTags.ARROWS)
                 .addOptionalTag(EntityTypeTags.IMPACT_PROJECTILES)
-                .add(EntityType.ITEM)
-                .add(EntityType.EXPERIENCE_ORB)
-                .add(EntityType.EXPERIENCE_BOTTLE)
-                .add(EntityType.LINGERING_POTION)
-                .add(EntityType.SPLASH_POTION)
+                .add(EntityTypeIds.ITEM)
+                .add(EntityTypeIds.EXPERIENCE_ORB)
+                .add(EntityTypeIds.EXPERIENCE_BOTTLE)
+                .add(EntityTypeIds.LINGERING_POTION)
+                .add(EntityTypeIds.SPLASH_POTION)
                 .addOptionalTag(FactoryEntityTags.FLUID_SPLASH)
         ;
-        this.valueLookupBuilder(FactoryEntityTags.FLUID_SPLASH)
-                .add(FactoryEntities.EXPERIENCE_SPLASH)
-                .add(FactoryEntities.HONEY_SPLASH)
-                .add(FactoryEntities.SLIME_SPLASH)
-                .add(FactoryEntities.LAVA_SPLASH)
-                .add(FactoryEntities.MILK_SPLASH)
-                .add(FactoryEntities.WATER_SPLASH)
-                .add(FactoryEntities.POTION_SPLASH)
+        this.tag(FactoryEntityTags.FLUID_SPLASH)
+                .add(FactoryEntityIds.EXPERIENCE_SPLASH)
+                .add(FactoryEntityIds.HONEY_SPLASH)
+                .add(FactoryEntityIds.SLIME_SPLASH)
+                .add(FactoryEntityIds.LAVA_SPLASH)
+                .add(FactoryEntityIds.MILK_SPLASH)
+                .add(FactoryEntityIds.WATER_SPLASH)
+                .add(FactoryEntityIds.POTION_SPLASH)
         ;
     }
 }

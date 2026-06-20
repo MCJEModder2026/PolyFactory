@@ -1,5 +1,6 @@
 package eu.pb4.polyfactory.datagen;
 
+import com.mojang.datafixers.util.Pair;
 import eu.pb4.factorytools.api.recipe.CountedIngredient;
 import eu.pb4.factorytools.api.recipe.OutputStack;
 import eu.pb4.polyfactory.block.BlockHeat;
@@ -39,7 +40,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
+import net.minecraft.advancements.triggers.InventoryChangeTrigger;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
@@ -57,7 +58,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.Tuple;
 import net.minecraft.util.Unit;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
@@ -87,7 +87,7 @@ class RecipesProvider extends FabricRecipeProvider {
                 nineBlockStorageRecipes(RecipeCategory.MISC, FactoryItems.STEEL_INGOT, RecipeCategory.MISC, FactoryItems.STEEL_BLOCK, "steel_block", null, "steel_ingot_from_block", null);
 
                 //noinspection unchecked
-                var dyes = (List<DyeItem>) (Object) List.of(Items.BLACK_DYE, Items.BLUE_DYE, Items.BROWN_DYE, Items.CYAN_DYE, Items.GRAY_DYE, Items.GREEN_DYE, Items.LIGHT_BLUE_DYE, Items.LIGHT_GRAY_DYE, Items.LIME_DYE, Items.MAGENTA_DYE, Items.ORANGE_DYE, Items.PINK_DYE, Items.PURPLE_DYE, Items.RED_DYE, Items.YELLOW_DYE, Items.WHITE_DYE);
+                var dyes = (List<DyeItem>) (Object) Items.DYE.asList();
 
                 this.shapeless(RecipeCategory.TOOLS, FactoryItems.STEEL_ALLOY_MIXTURE)
                         .requires(Items.IRON_INGOT, 2).requires(FactoryItems.COAL_DUST).requires(Items.REDSTONE)
@@ -257,7 +257,7 @@ class RecipesProvider extends FabricRecipeProvider {
                         .save(output);
 
                 this.shapeless(RecipeCategory.MISC, FactoryItems.BLUEPRINT_WORKBENCH, 1)
-                        .requires(Items.BLUE_DYE)
+                        .requires(Items.DYE.blue())
                         .requires(Items.PAPER)
                         .requires(FactoryItems.WORKBENCH)
                         .unlockedBy("get_plate", InventoryChangeTrigger.TriggerInstance.hasItems(FactoryItems.WOODEN_PLATE))
@@ -351,7 +351,7 @@ class RecipesProvider extends FabricRecipeProvider {
                         .pattern("pgp")
                         .define('p', FactoryItems.COPPER_PLATE)
                         .define('g', Items.TINTED_GLASS)
-                        .define('c', Items.COPPER_BLOCK)
+                        .define('c', Items.COPPER_BLOCK.weathering().unaffected())
                         .unlockedBy("get_copper", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COPPER_INGOT))
                         .save(output);
 
@@ -591,14 +591,14 @@ class RecipesProvider extends FabricRecipeProvider {
                 this.shapeless(RecipeCategory.REDSTONE, FactoryItems.WIRELESS_REDSTONE_RECEIVER)
                         .requires(FactoryItems.REDSTONE_OUTPUT)
                         .requires(FactoryItems.ENDER_INFUSED_AMETHYST_SHARD)
-                        .requires(Items.LIGHTNING_ROD)
+                        .requires(Items.LIGHTNING_ROD.weathering().unaffected())
                         .unlockedBy("get_item", InventoryChangeTrigger.TriggerInstance.hasItems(FactoryItems.STEEL_PLATE))
                         .save(output);
 
                 this.shapeless(RecipeCategory.REDSTONE, FactoryItems.WIRELESS_REDSTONE_TRANSMITTER)
                         .requires(FactoryItems.REDSTONE_INPUT)
                         .requires(FactoryItems.ENDER_INFUSED_AMETHYST_SHARD)
-                        .requires(Items.LIGHTNING_ROD)
+                        .requires(Items.LIGHTNING_ROD.weathering().unaffected())
                         .unlockedBy("get_item", InventoryChangeTrigger.TriggerInstance.hasItems(FactoryItems.STEEL_PLATE))
                         .save(output);
 
@@ -984,30 +984,30 @@ class RecipesProvider extends FabricRecipeProvider {
                         ),
 
                         // Flower to Dye
-                        SimpleGrindingRecipe.of("dandelion_to_dye", "dye", Ingredient.of(Items.DANDELION), 1, 6, new ItemStackTemplate(Items.YELLOW_DYE, 3)),
-                        SimpleGrindingRecipe.of("torch_flower_to_dye", "dye", Ingredient.of(Items.TORCHFLOWER), 1, 6, new ItemStackTemplate(Items.ORANGE_DYE, 3)),
-                        SimpleGrindingRecipe.of("orchid_to_dye", "dye", Ingredient.of(Items.BLUE_ORCHID), 1, 6, new ItemStackTemplate(Items.LIGHT_BLUE_DYE, 3)),
-                        SimpleGrindingRecipe.of("allium_to_dye", "dye", Ingredient.of(Items.ALLIUM), 1, 6, new ItemStackTemplate(Items.MAGENTA_DYE, 3)),
-                        SimpleGrindingRecipe.of("azure_bluet_to_dye", "dye", Ingredient.of(Items.AZURE_BLUET), 1, 6, new ItemStackTemplate(Items.LIGHT_GRAY_DYE, 3)),
-                        SimpleGrindingRecipe.of("daisy_to_dye", "dye", Ingredient.of(Items.OXEYE_DAISY), 1, 6, new ItemStackTemplate(Items.LIGHT_GRAY_DYE, 3)),
-                        SimpleGrindingRecipe.of("red_tulip_to_dye", "dye", Ingredient.of(Items.RED_TULIP), 1, 6, new ItemStackTemplate(Items.RED_DYE, 3)),
-                        SimpleGrindingRecipe.of("orange_tulip_to_dye", "dye", Ingredient.of(Items.ORANGE_TULIP), 1, 6, new ItemStackTemplate(Items.ORANGE_DYE, 3)),
-                        SimpleGrindingRecipe.of("white_tulip_to_dye", "dye", Ingredient.of(Items.WHITE_TULIP), 1, 6, new ItemStackTemplate(Items.LIGHT_GRAY_DYE, 3)),
-                        SimpleGrindingRecipe.of("pink_tulip_to_dye", "dye", Ingredient.of(Items.PINK_TULIP), 1, 6, new ItemStackTemplate(Items.PINK_DYE, 3)),
-                        SimpleGrindingRecipe.of("cornflower_to_dye", "dye", Ingredient.of(Items.CORNFLOWER), 1, 6, new ItemStackTemplate(Items.BLUE_DYE, 3)),
-                        SimpleGrindingRecipe.of("lily_to_dye", "dye", Ingredient.of(Items.LILY_OF_THE_VALLEY), 1, 6, new ItemStackTemplate(Items.WHITE_DYE, 3)),
-                        SimpleGrindingRecipe.of("wither_rose_to_dye", "dye", Ingredient.of(Items.WITHER_ROSE), 1, 6, new ItemStackTemplate(Items.BLACK_DYE, 3)),
-                        SimpleGrindingRecipe.of("sunflower_to_dye", "dye", Ingredient.of(Items.SUNFLOWER), 1, 6, new ItemStackTemplate(Items.YELLOW_DYE, 6)),
-                        SimpleGrindingRecipe.of("lilac_to_dye", "dye", Ingredient.of(Items.LILAC), 1, 6, new ItemStackTemplate(Items.MAGENTA_DYE, 6)),
-                        SimpleGrindingRecipe.of("peony_to_dye", "dye", Ingredient.of(Items.PEONY), 1, 6, new ItemStackTemplate(Items.PINK_DYE, 6)),
-                        SimpleGrindingRecipe.of("rose_to_dye", "dye", Ingredient.of(Items.ROSE_BUSH), 1, 6, new ItemStackTemplate(Items.RED_DYE, 6)),
-                        SimpleGrindingRecipe.of("pitcher_to_dye", "dye", Ingredient.of(Items.PITCHER_PLANT), 1, 6, new ItemStackTemplate(Items.CYAN_DYE, 6)),
-                        SimpleGrindingRecipe.of("cactus_to_dye", "dye", Ingredient.of(Items.CACTUS), 1, 6, new ItemStackTemplate(Items.GREEN_DYE, 3)),
-                        SimpleGrindingRecipe.of("closed_eyeblossom_to_dye", "dye", Ingredient.of(Items.CLOSED_EYEBLOSSOM), 1, 6, new ItemStackTemplate(Items.GRAY_DYE, 3)),
-                        SimpleGrindingRecipe.of("open_eyeblossom_to_dye", "dye", Ingredient.of(Items.OPEN_EYEBLOSSOM), 1, 6, new ItemStackTemplate(Items.ORANGE_DYE, 3)),
-                        SimpleGrindingRecipe.of("cactus_flower_to_dye", "dye", Ingredient.of(Items.CACTUS_FLOWER), 1, 6, new ItemStackTemplate(Items.PINK_DYE, 3)),
-                        SimpleGrindingRecipe.of("wildflowers_to_dye", "dye", Ingredient.of(Items.WILDFLOWERS), 1, 6, new ItemStackTemplate(Items.YELLOW_DYE, 3)),
-                        SimpleGrindingRecipe.of("leaf_litter_to_dye", "dye", Ingredient.of(Items.LEAF_LITTER), 1, 6, OutputStack.of(Items.BROWN_DYE, 0.3f))
+                        SimpleGrindingRecipe.of("dandelion_to_dye", "dye", Ingredient.of(Items.DANDELION), 1, 6, new ItemStackTemplate(Items.DYE.yellow(), 3)),
+                        SimpleGrindingRecipe.of("torch_flower_to_dye", "dye", Ingredient.of(Items.TORCHFLOWER), 1, 6, new ItemStackTemplate(Items.DYE.orange(), 3)),
+                        SimpleGrindingRecipe.of("orchid_to_dye", "dye", Ingredient.of(Items.BLUE_ORCHID), 1, 6, new ItemStackTemplate(Items.DYE.lightBlue(), 3)),
+                        SimpleGrindingRecipe.of("allium_to_dye", "dye", Ingredient.of(Items.ALLIUM), 1, 6, new ItemStackTemplate(Items.DYE.magenta(), 3)),
+                        SimpleGrindingRecipe.of("azure_bluet_to_dye", "dye", Ingredient.of(Items.AZURE_BLUET), 1, 6, new ItemStackTemplate(Items.DYE.lightGray(), 3)),
+                        SimpleGrindingRecipe.of("daisy_to_dye", "dye", Ingredient.of(Items.OXEYE_DAISY), 1, 6, new ItemStackTemplate(Items.DYE.lightGray(), 3)),
+                        SimpleGrindingRecipe.of("red_tulip_to_dye", "dye", Ingredient.of(Items.RED_TULIP), 1, 6, new ItemStackTemplate(Items.DYE.red(), 3)),
+                        SimpleGrindingRecipe.of("orange_tulip_to_dye", "dye", Ingredient.of(Items.ORANGE_TULIP), 1, 6, new ItemStackTemplate(Items.DYE.orange(), 3)),
+                        SimpleGrindingRecipe.of("white_tulip_to_dye", "dye", Ingredient.of(Items.WHITE_TULIP), 1, 6, new ItemStackTemplate(Items.DYE.lightGray(), 3)),
+                        SimpleGrindingRecipe.of("pink_tulip_to_dye", "dye", Ingredient.of(Items.PINK_TULIP), 1, 6, new ItemStackTemplate(Items.DYE.pink(), 3)),
+                        SimpleGrindingRecipe.of("cornflower_to_dye", "dye", Ingredient.of(Items.CORNFLOWER), 1, 6, new ItemStackTemplate(Items.DYE.blue(), 3)),
+                        SimpleGrindingRecipe.of("lily_to_dye", "dye", Ingredient.of(Items.LILY_OF_THE_VALLEY), 1, 6, new ItemStackTemplate(Items.DYE.white(), 3)),
+                        SimpleGrindingRecipe.of("wither_rose_to_dye", "dye", Ingredient.of(Items.WITHER_ROSE), 1, 6, new ItemStackTemplate(Items.DYE.black(), 3)),
+                        SimpleGrindingRecipe.of("sunflower_to_dye", "dye", Ingredient.of(Items.SUNFLOWER), 1, 6, new ItemStackTemplate(Items.DYE.yellow(), 6)),
+                        SimpleGrindingRecipe.of("lilac_to_dye", "dye", Ingredient.of(Items.LILAC), 1, 6, new ItemStackTemplate(Items.DYE.magenta(), 6)),
+                        SimpleGrindingRecipe.of("peony_to_dye", "dye", Ingredient.of(Items.PEONY), 1, 6, new ItemStackTemplate(Items.DYE.pink(), 6)),
+                        SimpleGrindingRecipe.of("rose_to_dye", "dye", Ingredient.of(Items.ROSE_BUSH), 1, 6, new ItemStackTemplate(Items.DYE.red(), 6)),
+                        SimpleGrindingRecipe.of("pitcher_to_dye", "dye", Ingredient.of(Items.PITCHER_PLANT), 1, 6, new ItemStackTemplate(Items.DYE.cyan(), 6)),
+                        SimpleGrindingRecipe.of("cactus_to_dye", "dye", Ingredient.of(Items.CACTUS), 1, 6, new ItemStackTemplate(Items.DYE.green(), 3)),
+                        SimpleGrindingRecipe.of("closed_eyeblossom_to_dye", "dye", Ingredient.of(Items.CLOSED_EYEBLOSSOM), 1, 6, new ItemStackTemplate(Items.DYE.gray(), 3)),
+                        SimpleGrindingRecipe.of("open_eyeblossom_to_dye", "dye", Ingredient.of(Items.OPEN_EYEBLOSSOM), 1, 6, new ItemStackTemplate(Items.DYE.orange(), 3)),
+                        SimpleGrindingRecipe.of("cactus_flower_to_dye", "dye", Ingredient.of(Items.CACTUS_FLOWER), 1, 6, new ItemStackTemplate(Items.DYE.pink(), 3)),
+                        SimpleGrindingRecipe.of("wildflowers_to_dye", "dye", Ingredient.of(Items.WILDFLOWERS), 1, 6, new ItemStackTemplate(Items.DYE.yellow(), 3)),
+                        SimpleGrindingRecipe.of("leaf_litter_to_dye", "dye", Ingredient.of(Items.LEAF_LITTER), 1, 6, OutputStack.of(Items.DYE.brown(), 0.3f))
                 );
 
                 oreSmelting(List.of(FactoryItems.CRUSHED_RAW_IRON), RecipeCategory.MISC, CookingBookCategory.MISC, Items.IRON_INGOT, 0.5F, 180, "iron_ingot");
@@ -1164,7 +1164,7 @@ class RecipesProvider extends FabricRecipeProvider {
                     {
                         var comp = DataComponentPatch.builder();
 
-                        if (dye != Items.WHITE_DYE) {
+                        if (dye != Items.DYE.white()) {
                             comp.set(DataComponents.DYED_COLOR, new DyedItemColor(DyeColorExtra.getColor(dyeColor)));
                         }
 
@@ -1248,7 +1248,7 @@ class RecipesProvider extends FabricRecipeProvider {
                         .save(output);
 
                 of(output,
-                        GenericMixingRecipe.ofCounted("treated_dried_kelp", List.of(CountedIngredient.ofItems(16, Items.DRIED_KELP), CountedIngredient.ofItems(1, Items.BLACK_DYE)), 2, 1, 6f, 0.2f, new ItemStackTemplate(FactoryItems.TREATED_DRIED_KELP, 16)),
+                        GenericMixingRecipe.ofCounted("treated_dried_kelp", List.of(CountedIngredient.ofItems(16, Items.DRIED_KELP), CountedIngredient.ofItems(1, Items.DYE.black())), 2, 1, 6f, 0.2f, new ItemStackTemplate(FactoryItems.TREATED_DRIED_KELP, 16)),
                         GenericMixingRecipe.ofCounted("fermented_spider_eye", List.of(CountedIngredient.ofItems(1, Items.SPIDER_EYE),
                                         CountedIngredient.ofItems(1, Items.SUGAR),
                                         CountedIngredient.ofItems(1, Items.BROWN_MUSHROOM)), 3, 4, 8f,
@@ -1447,15 +1447,15 @@ class RecipesProvider extends FabricRecipeProvider {
 
                 for (var i : List.of(FactoryFluids.WATER, FactoryFluids.MILK)) {
                     for (var s : List.of(
-                            new Tuple<>(FactoryFluids.LAVA.of(3000), OutputStack.of(Items.FLINT, 0.15f, 1)),
-                            new Tuple<>(FactoryFluids.IRON.of(FluidConstants.NUGGET), OutputStack.of(Items.IRON_NUGGET, 0.9f, 1)),
-                            new Tuple<>(FactoryFluids.GOLD.of(FluidConstants.NUGGET), OutputStack.of(Items.GOLD_NUGGET, 0.9f, 1)),
-                            new Tuple<>(FactoryFluids.COPPER.of(FluidConstants.NUGGET), OutputStack.of(Items.COPPER_NUGGET, 0.9f, 1)),
-                            new Tuple<>(FactoryFluids.STEEL.of(FluidConstants.NUGGET), OutputStack.of(FactoryItems.STEEL_NUGGET, 0.9f, 1))
+                            new Pair<>(FactoryFluids.LAVA.of(3000), OutputStack.of(Items.FLINT, 0.15f, 1)),
+                            new Pair<>(FactoryFluids.IRON.of(FluidConstants.NUGGET), OutputStack.of(Items.IRON_NUGGET, 0.9f, 1)),
+                            new Pair<>(FactoryFluids.GOLD.of(FluidConstants.NUGGET), OutputStack.of(Items.GOLD_NUGGET, 0.9f, 1)),
+                            new Pair<>(FactoryFluids.COPPER.of(FluidConstants.NUGGET), OutputStack.of(Items.COPPER_NUGGET, 0.9f, 1)),
+                            new Pair<>(FactoryFluids.STEEL.of(FluidConstants.NUGGET), OutputStack.of(FactoryItems.STEEL_NUGGET, 0.9f, 1))
                     )) {
-                        destructiveItemCreatingFluidInteraction(output, FactoryRegistries.FLUID_TYPES.getKey(i).getPath() + "_" + FactoryRegistries.FLUID_TYPES.getKey(s.getA().type()).getPath(),
-                                (int) (3000 / FluidConstants.NUGGET), List.of(i.of(s.getA().amount() * 2), s.getA()),
-                                s.getB(), ParticleTypes.LARGE_SMOKE, FactorySoundEvents.BLOCK_SPOUT_METAL_COOLED.value());
+                        destructiveItemCreatingFluidInteraction(output, FactoryRegistries.FLUID_TYPES.getKey(i).getPath() + "_" + FactoryRegistries.FLUID_TYPES.getKey(s.getFirst().type()).getPath(),
+                                (int) (3000 / FluidConstants.NUGGET), List.of(i.of(s.getFirst().amount() * 2), s.getFirst()),
+                                s.getSecond(), ParticleTypes.LARGE_SMOKE, FactorySoundEvents.BLOCK_SPOUT_METAL_COOLED.value());
                     }
                 }
 
@@ -1486,7 +1486,7 @@ class RecipesProvider extends FabricRecipeProvider {
                 smelteryOreSet(FactoryFluids.GOLD, FactoryFluidConstants.GOLD_INGOT_MELTING, ItemTags.GOLD_ORES, Items.RAW_GOLD, Items.RAW_GOLD_BLOCK,
                         FactoryItems.CRUSHED_RAW_GOLD, Items.GOLD_INGOT, Items.GOLD_NUGGET, Items.GOLD_BLOCK, null);
                 smelteryOreSet(FactoryFluids.COPPER, FactoryFluidConstants.COPPER_INGOT_MELTING, ItemTags.COPPER_ORES, Items.RAW_COPPER, Items.RAW_COPPER_BLOCK,
-                        FactoryItems.CRUSHED_RAW_COPPER, Items.COPPER_INGOT, Items.COPPER_NUGGET, Items.COPPER_BLOCK, FactoryItems.COPPER_PLATE);
+                        FactoryItems.CRUSHED_RAW_COPPER, Items.COPPER_INGOT, Items.COPPER_NUGGET, Items.COPPER_BLOCK.weathering().unaffected(), FactoryItems.COPPER_PLATE);
 
 
                 of(output,
@@ -1521,7 +1521,7 @@ class RecipesProvider extends FabricRecipeProvider {
                 moldRecipes(FactoryItems.THROWABLE_BOTTLE_MOLD, FactoryFluids.GLASS.of(FluidConstants.BLOCK / 2), FactoryItems.THROWABLE_GLASS_BOTTLE);
                 moldRecipes(FactoryItems.BRITTLE_BOTTLE_MOLD, FactoryFluids.GLASS.of(FluidConstants.BLOCK / 2), FactoryItems.BRITTLE_GLASS_BOTTLE);
                 moldRecipes(FactoryItems.CHAIN_MOLD, FactoryFluids.IRON.of(FluidConstants.NUGGET * 8), Items.IRON_CHAIN);
-                moldRecipes(FactoryItems.CHAIN_MOLD, FactoryFluids.COPPER.of(FluidConstants.NUGGET * 8), Items.COPPER_CHAIN.unaffected());
+                moldRecipes(FactoryItems.CHAIN_MOLD, FactoryFluids.COPPER.of(FluidConstants.NUGGET * 8), Items.COPPER_CHAIN.weathering().unaffected());
 
                 output.accept(recipeKey("casting/glass_pane"), SimpleCastingRecipe.fluid(FactoryFluids.GLASS.of(FluidConstants.BLOCK * 6 / 16), Items.GLASS_PANE, FactorySoundEvents.BLOCK_SPOUT_METAL_COOLED.value(), 40), null);
                 output.accept(recipeKey("casting/iron_bars"), SimpleCastingRecipe.fluid(FactoryFluids.IRON.of(FluidConstants.BLOCK * 6 / 16), Items.IRON_BARS, FactorySoundEvents.BLOCK_SPOUT_METAL_COOLED.value(), 40), null);

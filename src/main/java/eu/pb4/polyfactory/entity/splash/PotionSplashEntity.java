@@ -60,8 +60,8 @@ public class PotionSplashEntity extends SplashEntity<PotionContents> {
                     continue;
                 }
 
-                if (effect.getEffect().value().isInstantenous()) {
-                    effect.getEffect().value().applyInstantenousEffect(world, this, this.getOwner(), livingEntity, effect.getAmplifier(), 0.1);
+                if (effect.getEffect().value().isInstantaneous()) {
+                    effect.getEffect().value().applyInstantaneousEffect(world, this, this.getOwner(), livingEntity, effect.getAmplifier(), 0.1);
                     continue;
                 }
 

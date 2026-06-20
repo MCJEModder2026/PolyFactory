@@ -1,5 +1,6 @@
 package eu.pb4.polyfactory.entity;
 
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import eu.pb4.factorytools.api.advancement.TriggerCriterion;
 import eu.pb4.factorytools.api.util.LazyItemStack;
@@ -29,16 +30,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Leashable;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MoverType;
-import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -241,10 +235,10 @@ public class ChainLiftEntity extends VehicleEntity implements PolymerEntity, Con
             if (newTarget != null) {
                 if (reverse) {
                     this.targetPos = this.sourcePos;
-                    this.sourcePos = newTarget.getA();
-                    this.progress = (float) (newTarget.getB().distance() - (float) ((moveSpeed - angle) * ChainDriveBlock.RADIUS * moved));
+                    this.sourcePos = newTarget.getFirst();
+                    this.progress = (float) (newTarget.getSecond().distance() - (float) ((moveSpeed - angle) * ChainDriveBlock.RADIUS * moved));
                 } else {
-                    this.targetPos = newTarget.getA();
+                    this.targetPos = newTarget.getFirst();
                     this.progress = (float) ((moveSpeed - angle) * ChainDriveBlock.RADIUS * moved);
                 }
                 this.centerAngle = 0;
@@ -289,7 +283,7 @@ public class ChainLiftEntity extends VehicleEntity implements PolymerEntity, Con
 
                 this.progress = 0;
                 this.centerAngle = angle;
-                this.targetPos = newTarget != null ? newTarget.getA() : null;
+                this.targetPos = newTarget != null ? newTarget.getFirst() : null;
             } else {
                 this.progress += moveSpeed * ChainDriveBlock.RADIUS * moved;
             }
@@ -421,23 +415,23 @@ public class ChainLiftEntity extends VehicleEntity implements PolymerEntity, Con
         };
     }
 
-    private Tuple<BlockPos, ChainDriveBlock.Route> findNewTarget(ChainDriveBlockEntity chainDrive, Vec3 offset, boolean reverse, float moveSpeed) {
+    private Pair<BlockPos, ChainDriveBlock.Route> findNewTarget(ChainDriveBlockEntity chainDrive, Vec3 offset, boolean reverse, float moveSpeed) {
         List<BlockPos> conns;
 
         if (this.getFirstPassenger() instanceof ServerPlayer player && this.playerControllable) {
             conns = new ArrayList<>();
             var camera = player.getLookAngle();
-            var tmp = new ArrayList<Tuple<BlockPos, Double>>();
+            var tmp = new ArrayList<Pair<BlockPos, Double>>();
             for (var conn : chainDrive.connections()) {
                 var vec = Vec3.atCenterOf(conn).subtract(player.getEyePosition()).normalize();
-                tmp.add(new Tuple<>(conn, vec.subtract(camera).lengthSqr()));
+                tmp.add(new Pair<>(conn, vec.subtract(camera).lengthSqr()));
             }
-            tmp.sort(Comparator.comparingDouble(Tuple::getB));
-            if (!tmp.isEmpty() && tmp.getFirst().getB() <= 0.25) {
-                conns.add(tmp.getFirst().getA());
+            tmp.sort(Comparator.comparingDouble(Pair::getSecond));
+            if (!tmp.isEmpty() && tmp.getFirst().getSecond() <= 0.25) {
+                conns.add(tmp.getFirst().getFirst());
             } else {
                 for (var t : tmp) {
-                    conns.add(t.getA());
+                    conns.add(t.getFirst());
                 }
             }
         } else {
@@ -466,10 +460,10 @@ public class ChainLiftEntity extends VehicleEntity implements PolymerEntity, Con
             //tmp = route.startPos().add(shift).add(Vec3d.ofCenter(this.sourcePos));
             //((ServerWorld) this.getEntityWorld()).spawnParticles(ParticleTypes.BUBBLE, tmp.x, tmp.y + 1, tmp.z, 0, 0, 0, 0, 0);
             if (!reverse && route.startPos().add(shift).distanceTo(offset) <= Math.max(moveSpeed, 0.3f)) {
-                return new Tuple<>(conn, route);
+                return new Pair<>(conn, route);
             }
             if (reverse && route.endPos().add(shift).distanceTo(offset) <= Math.max(-moveSpeed, 0.3f)) {
-                return new Tuple<>(conn, route);
+                return new Pair<>(conn, route);
             }
         }
 
@@ -546,7 +540,7 @@ public class ChainLiftEntity extends VehicleEntity implements PolymerEntity, Con
 
     @Override
     public EntityType<?> getPolymerEntityType(PacketContext packetContext) {
-        return EntityType.ITEM_DISPLAY;
+        return EntityTypes.ITEM_DISPLAY;
     }
 
     @Override

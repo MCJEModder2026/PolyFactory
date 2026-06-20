@@ -11,6 +11,7 @@ import eu.pb4.polyfactory.block.FactoryBlockEntities;
 import eu.pb4.polyfactory.block.configurable.BlockConfig;
 import eu.pb4.polyfactory.block.configurable.ConfigurableBlock;
 import eu.pb4.polyfactory.block.configurable.WrenchModifyBlockValue;
+import eu.pb4.polyfactory.mixin.EntityAccessor;
 import eu.pb4.polyfactory.models.RotationAwareModel;
 import eu.pb4.polyfactory.nodes.generic.FunctionalAxisNode;
 import eu.pb4.polyfactory.nodes.mechanical.RotationData;
@@ -37,7 +38,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PositionMoveRotation;
 import net.minecraft.world.entity.Relative;
-import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
@@ -148,7 +148,8 @@ public class EjectorBlock extends RotationalNetworkBlock implements FactoryBlock
         if (entity instanceof LivingEntity livingEntity) {
             horizontalDrag = livingEntity.shouldDiscardFriction() ? 1 : 0.91F;
         }
-        if (entity instanceof FlyingAnimal) {
+
+        if (((EntityAccessor)entity).callOmnidirectionalAirMover()) {
             verticalDrag = horizontalDrag;
         }
 

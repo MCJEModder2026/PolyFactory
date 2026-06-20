@@ -28,7 +28,7 @@ import org.joml.Vector3f;
 public class WaterSplashEntity extends SplashEntity<Unit> {
     private static final int WATER_COLOR = -13083194;
     //private static final ParticleEffect PARTICLE = EntityEffectParticleEffect.create(ParticleTypes.ENTITY_EFFECT, WATER_COLOR);
-    private static final ParticleOptions PARTICLE = new ItemParticleOption(ParticleTypes.ITEM, Items.BLUE_STAINED_GLASS_PANE);
+    private static final ParticleOptions PARTICLE = new ItemParticleOption(ParticleTypes.ITEM, Items.STAINED_GLASS_PANE.blue());
     //private static final ParticleEffect PARTICLE = new DustParticleEffect(new Vector3f(56 / 255f, 93/ 255f, 199/ 255f), 0.5f);
     public WaterSplashEntity(EntityType<? extends Projectile> entityType, Level world) {
         super(entityType, world, FactoryFluids.WATER);

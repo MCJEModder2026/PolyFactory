@@ -1,12 +1,14 @@
 package eu.pb4.polyfactory.datagen;
 
 import eu.pb4.polyfactory.block.FactoryBlockTags;
-import eu.pb4.polyfactory.block.FactoryBlocks;
+import eu.pb4.polyfactory.block.FactoryBlockIds;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.references.BlockItemIds;
+import net.minecraft.tags.BlockItemTags;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import java.util.concurrent.CompletableFuture;
@@ -23,7 +25,7 @@ class BlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
                 .addOptionalTag(BlockTags.WOOL_CARPETS)
                 .addOptionalTag(BlockTags.BEDS)
                 .addOptionalTag(BlockTags.TERRACOTTA)
-                .addOptionalTag(BlockTags.CONCRETE_POWDER)
+                .addOptionalTag(BlockItemTags.CONCRETE_POWDERS.block())
                 .addOptionalTag(BlockTags.CANDLES)
                 .addOptionalTag(BlockTags.CANDLE_CAKES)
                 .addOptionalTag(ConventionalBlockTags.GLASS_BLOCKS)
@@ -31,154 +33,154 @@ class BlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
                 .addOptionalTag(FactoryBlockTags.CONCRETE)
         ;
 
-        this.valueLookupBuilder(FactoryBlockTags.CONVEYORS)
-                .add(FactoryBlocks.CONVEYOR)
-                .add(FactoryBlocks.STICKY_CONVEYOR);
+        this.tag(FactoryBlockTags.CONVEYORS)
+                .add(FactoryBlockIds.CONVEYOR)
+                .add(FactoryBlockIds.STICKY_CONVEYOR);
 
-        this.valueLookupBuilder(FactoryBlockTags.CONVEYOR_TOP_OUTPUT)
-                .add(FactoryBlocks.FUNNEL).add(FactoryBlocks.SLOT_AWARE_FUNNEL).add(FactoryBlocks.SPLITTER);
+        this.tag(FactoryBlockTags.CONVEYOR_TOP_OUTPUT)
+                .add(FactoryBlockIds.FUNNEL).add(FactoryBlockIds.SLOT_AWARE_FUNNEL).add(FactoryBlockIds.SPLITTER);
 
-        this.valueLookupBuilder(FactoryBlockTags.GRINDER_TOP_PLACEABLE)
-                .add(FactoryBlocks.HAND_CRANK).add(FactoryBlocks.AXLE);
+        this.tag(FactoryBlockTags.GRINDER_TOP_PLACEABLE)
+                .add(FactoryBlockIds.HAND_CRANK).add(FactoryBlockIds.AXLE);
 
-        this.valueLookupBuilder(FactoryBlockTags.CONVEYOR_SIDE_OUTPUT)
-                .add(FactoryBlocks.PRESS)
-                .add(FactoryBlocks.MIXER)
-                .add(FactoryBlocks.MECHANICAL_SPOUT)
-                .add(FactoryBlocks.MECHANICAL_DRAIN)
-                .add(FactoryBlocks.GRINDER)
-                .add(Blocks.HOPPER)
-                .add(Blocks.COMPOSTER)
+        this.tag(FactoryBlockTags.CONVEYOR_SIDE_OUTPUT)
+                .add(FactoryBlockIds.PRESS)
+                .add(FactoryBlockIds.MIXER)
+                .add(FactoryBlockIds.MECHANICAL_SPOUT)
+                .add(FactoryBlockIds.MECHANICAL_DRAIN)
+                .add(FactoryBlockIds.GRINDER)
+                .add(BlockItemIds.HOPPER.block())
+                .add(BlockItemIds.COMPOSTER.block())
         ;
 
-        this.valueLookupBuilder(FactoryBlockTags.SPLITTER_SIDE_OUTPUT)
+        this.tag(FactoryBlockTags.SPLITTER_SIDE_OUTPUT)
                 .addOptionalTag(FactoryBlockTags.CONVEYOR_SIDE_OUTPUT)
                 .addOptionalTag(FactoryBlockTags.CONVEYORS);
 
-        this.valueLookupBuilder(FactoryBlockTags.WIND_PASSTHROUGH)
+        this.tag(FactoryBlockTags.WIND_PASSTHROUGH)
                 .addOptionalTag(BlockTags.TRAPDOORS)
                 .addOptionalTag(BlockTags.FENCES)
                 .addOptionalTag(BlockTags.FENCE_GATES)
                 .addOptionalTag(BlockTags.BANNERS)
                 .addOptionalTag(BlockTags.ALL_SIGNS)
-                .add(FactoryBlocks.NIXIE_TUBE)
-                .add(FactoryBlocks.HAND_CRANK)
-                .add(FactoryBlocks.METAL_GRID)
+                .add(FactoryBlockIds.NIXIE_TUBE)
+                .add(FactoryBlockIds.HAND_CRANK)
+                .add(FactoryBlockIds.METAL_GRID)
         ;
 
-        this.valueLookupBuilder(FactoryBlockTags.PIPE_CONNECTABLE)
+        this.tag(FactoryBlockTags.PIPE_CONNECTABLE)
                 .addOptionalTag(BlockTags.CAULDRONS)
-                .add(Blocks.BEEHIVE)
+                .add(BlockItemIds.BEEHIVE.block())
         ;
 
-        this.valueLookupBuilder(BlockTags.INCORRECT_FOR_WOODEN_TOOL)
-                .add(FactoryBlocks.STEEL_BLOCK)
+        this.tag(BlockTags.INCORRECT_FOR_WOODEN_TOOL)
+                .add(FactoryBlockIds.STEEL_BLOCK)
                 ;
 
-        this.valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .addOptionalTag(FactoryBlockTags.CONVEYORS)
-                .add(FactoryBlocks.FAN,
-                        FactoryBlocks.NIXIE_TUBE,
-                        FactoryBlocks.PRESS,
-                        FactoryBlocks.FUNNEL,
-                        FactoryBlocks.SLOT_AWARE_FUNNEL,
-                        FactoryBlocks.GRINDER,
-                        FactoryBlocks.MINER,
-                        FactoryBlocks.SPLITTER)
-                .add(FactoryBlocks.MIXER)
-                .add(FactoryBlocks.EJECTOR)
-                .add(FactoryBlocks.STEEL_BLOCK)
-                .add(FactoryBlocks.PLANTER)
-                .add(FactoryBlocks.PLACER)
-                .add(FactoryBlocks.STEAM_ENGINE)
-                .add(FactoryBlocks.PRIMITIVE_SMELTERY)
-                .add(FactoryBlocks.ITEM_OUTPUT_BUFFER)
-                .add(FactoryBlocks.SMELTERY)
-                .add(FactoryBlocks.SMELTERY_CORE)
-                .add(FactoryBlocks.CASTING_TABLE)
-                .add(FactoryBlocks.CASTING_CAULDRON)
-                .add(FactoryBlocks.FAUCET)
-                .add(FactoryBlocks.DEEP_STORAGE_CONTAINER)
-                .add(FactoryBlocks.ITEM_COUNTER)
-                .add(FactoryBlocks.TEXT_INPUT)
-                .add(FactoryBlocks.DIGITAL_CLOCK)
-                .add(FactoryBlocks.GATED_CABLE)
-                .add(FactoryBlocks.REDSTONE_INPUT)
-                .add(FactoryBlocks.REDSTONE_OUTPUT)
-                .add(FactoryBlocks.WIRELESS_REDSTONE_RECEIVER)
-                .add(FactoryBlocks.WIRELESS_REDSTONE_TRANSMITTER)
-                .add(FactoryBlocks.HOLOGRAM_PROJECTOR)
-                .add(FactoryBlocks.ARITHMETIC_OPERATOR)
-                .add(FactoryBlocks.DATA_COMPARATOR)
-                .add(FactoryBlocks.DATA_EXTRACTOR)
-                .add(FactoryBlocks.PROGRAMMABLE_DATA_EXTRACTOR)
-                .add(FactoryBlocks.METAL_GRID)
-                .add(FactoryBlocks.ITEM_READER)
-                .add(FactoryBlocks.SPEAKER)
-                .add(FactoryBlocks.RECORD_PLAYER)
-                .add(FactoryBlocks.BLOCK_OBSERVER)
-                .add(FactoryBlocks.NIXIE_TUBE_CONTROLLER)
-                .add(FactoryBlocks.GAUGE)
-                .add(FactoryBlocks.ELECTRIC_MOTOR)
-                .add(FactoryBlocks.ELECTRIC_GENERATOR)
-                .add(FactoryBlocks.DATA_MEMORY)
-                .add(FactoryBlocks.TACHOMETER)
-                .add(FactoryBlocks.STRESSOMETER)
-                .add(FactoryBlocks.CABLE)
-                .add(FactoryBlocks.CRAFTER)
-                .add(FactoryBlocks.CLUTCH)
-                .add(FactoryBlocks.GEARSHIFT)
-                .add(FactoryBlocks.AXLE)
-                .add(FactoryBlocks.AXLE_WITH_GEAR)
-                .add(FactoryBlocks.CHAIN_DRIVE)
-                .add(FactoryBlocks.AXLE_WITH_LARGE_GEAR)
-                .add(FactoryBlocks.PIPE)
-                .add(FactoryBlocks.FILTERED_PIPE)
-                .add(FactoryBlocks.REDSTONE_VALVE_PIPE)
-                .add(FactoryBlocks.PUMP)
-                .add(FactoryBlocks.MECHANICAL_DRAIN)
-                .add(FactoryBlocks.MECHANICAL_SPOUT)
-                .add(FactoryBlocks.ITEM_PACKER)
-                .add(FactoryBlocks.DRAIN)
-                .add(FactoryBlocks.FLUID_TANK)
-                .add(FactoryBlocks.NOZZLE)
-                .add(FactoryBlocks.PORTABLE_FLUID_TANK)
-                //.add(FactoryBlocks.WALL_WITH_CABLE.values().toArray(new Block[0]))
+                .add(FactoryBlockIds.FAN,
+                        FactoryBlockIds.NIXIE_TUBE,
+                        FactoryBlockIds.PRESS,
+                        FactoryBlockIds.FUNNEL,
+                        FactoryBlockIds.SLOT_AWARE_FUNNEL,
+                        FactoryBlockIds.GRINDER,
+                        FactoryBlockIds.MINER,
+                        FactoryBlockIds.SPLITTER)
+                .add(FactoryBlockIds.MIXER)
+                .add(FactoryBlockIds.EJECTOR)
+                .add(FactoryBlockIds.STEEL_BLOCK)
+                .add(FactoryBlockIds.PLANTER)
+                .add(FactoryBlockIds.PLACER)
+                .add(FactoryBlockIds.STEAM_ENGINE)
+                .add(FactoryBlockIds.PRIMITIVE_SMELTERY)
+                .add(FactoryBlockIds.ITEM_OUTPUT_BUFFER)
+                .add(FactoryBlockIds.SMELTERY)
+                .add(FactoryBlockIds.SMELTERY_CORE)
+                .add(FactoryBlockIds.CASTING_TABLE)
+                .add(FactoryBlockIds.CASTING_CAULDRON)
+                .add(FactoryBlockIds.FAUCET)
+                .add(FactoryBlockIds.DEEP_STORAGE_CONTAINER)
+                .add(FactoryBlockIds.ITEM_COUNTER)
+                .add(FactoryBlockIds.TEXT_INPUT)
+                .add(FactoryBlockIds.DIGITAL_CLOCK)
+                .add(FactoryBlockIds.GATED_CABLE)
+                .add(FactoryBlockIds.REDSTONE_INPUT)
+                .add(FactoryBlockIds.REDSTONE_OUTPUT)
+                .add(FactoryBlockIds.WIRELESS_REDSTONE_RECEIVER)
+                .add(FactoryBlockIds.WIRELESS_REDSTONE_TRANSMITTER)
+                .add(FactoryBlockIds.HOLOGRAM_PROJECTOR)
+                .add(FactoryBlockIds.ARITHMETIC_OPERATOR)
+                .add(FactoryBlockIds.DATA_COMPARATOR)
+                .add(FactoryBlockIds.DATA_EXTRACTOR)
+                .add(FactoryBlockIds.PROGRAMMABLE_DATA_EXTRACTOR)
+                .add(FactoryBlockIds.METAL_GRID)
+                .add(FactoryBlockIds.ITEM_READER)
+                .add(FactoryBlockIds.SPEAKER)
+                .add(FactoryBlockIds.RECORD_PLAYER)
+                .add(FactoryBlockIds.BLOCK_OBSERVER)
+                .add(FactoryBlockIds.NIXIE_TUBE_CONTROLLER)
+                .add(FactoryBlockIds.GAUGE)
+                .add(FactoryBlockIds.ELECTRIC_MOTOR)
+                .add(FactoryBlockIds.ELECTRIC_GENERATOR)
+                .add(FactoryBlockIds.DATA_MEMORY)
+                .add(FactoryBlockIds.TACHOMETER)
+                .add(FactoryBlockIds.STRESSOMETER)
+                .add(FactoryBlockIds.CABLE)
+                .add(FactoryBlockIds.CRAFTER)
+                .add(FactoryBlockIds.CLUTCH)
+                .add(FactoryBlockIds.GEARSHIFT)
+                .add(FactoryBlockIds.AXLE)
+                .add(FactoryBlockIds.AXLE_WITH_GEAR)
+                .add(FactoryBlockIds.CHAIN_DRIVE)
+                .add(FactoryBlockIds.AXLE_WITH_LARGE_GEAR)
+                .add(FactoryBlockIds.PIPE)
+                .add(FactoryBlockIds.FILTERED_PIPE)
+                .add(FactoryBlockIds.REDSTONE_VALVE_PIPE)
+                .add(FactoryBlockIds.PUMP)
+                .add(FactoryBlockIds.MECHANICAL_DRAIN)
+                .add(FactoryBlockIds.MECHANICAL_SPOUT)
+                .add(FactoryBlockIds.ITEM_PACKER)
+                .add(FactoryBlockIds.DRAIN)
+                .add(FactoryBlockIds.FLUID_TANK)
+                .add(FactoryBlockIds.NOZZLE)
+                .add(FactoryBlockIds.PORTABLE_FLUID_TANK)
+                //.add(FactoryBlockIds.WALL_WITH_CABLE.values().toArray(new Block[0]))
         ;
 
-        this.valueLookupBuilder(FactoryBlockTags.UNCONNECTABLE)
-                .add(FactoryBlocks.PUMP)
-                .add(FactoryBlocks.PIPE)
-                .add(FactoryBlocks.NOZZLE)
-                .add(FactoryBlocks.FILTERED_PIPE)
-                .add(FactoryBlocks.REDSTONE_VALVE_PIPE)
-                .add(FactoryBlocks.PORTABLE_FLUID_TANK)
-                .add(FactoryBlocks.AXLE)
-                .add(FactoryBlocks.AXLE_WITH_GEAR)
-                .add(FactoryBlocks.TINY_POTATO_SPRING)
-                .add(FactoryBlocks.GOLDEN_TINY_POTATO_SPRING)
-                .add(FactoryBlocks.AXLE_WITH_LARGE_GEAR)
-                .add(FactoryBlocks.NIXIE_TUBE)
-                .add(FactoryBlocks.HOLOGRAM_PROJECTOR)
-                .add(FactoryBlocks.WIRELESS_REDSTONE_TRANSMITTER)
-                .add(FactoryBlocks.WIRELESS_REDSTONE_RECEIVER)
-                .add(FactoryBlocks.CAGED_LAMP)
-                .add(FactoryBlocks.INVERTED_CAGED_LAMP)
+        this.tag(FactoryBlockTags.UNCONNECTABLE)
+                .add(FactoryBlockIds.PUMP)
+                .add(FactoryBlockIds.PIPE)
+                .add(FactoryBlockIds.NOZZLE)
+                .add(FactoryBlockIds.FILTERED_PIPE)
+                .add(FactoryBlockIds.REDSTONE_VALVE_PIPE)
+                .add(FactoryBlockIds.PORTABLE_FLUID_TANK)
+                .add(FactoryBlockIds.AXLE)
+                .add(FactoryBlockIds.AXLE_WITH_GEAR)
+                .add(FactoryBlockIds.TINY_POTATO_SPRING)
+                .add(FactoryBlockIds.GOLDEN_TINY_POTATO_SPRING)
+                .add(FactoryBlockIds.AXLE_WITH_LARGE_GEAR)
+                .add(FactoryBlockIds.NIXIE_TUBE)
+                .add(FactoryBlockIds.HOLOGRAM_PROJECTOR)
+                .add(FactoryBlockIds.WIRELESS_REDSTONE_TRANSMITTER)
+                .add(FactoryBlockIds.WIRELESS_REDSTONE_RECEIVER)
+                .add(FactoryBlockIds.CAGED_LAMP)
+                .add(FactoryBlockIds.INVERTED_CAGED_LAMP)
 
         ;
 
-        this.valueLookupBuilder(BlockTags.MINEABLE_WITH_AXE)
-                .add(FactoryBlocks.WINDMILL)
-                .add(FactoryBlocks.AXLE)
-                .add(FactoryBlocks.AXLE_WITH_GEAR)
-                .add(FactoryBlocks.AXLE_WITH_LARGE_GEAR)
-                .add(FactoryBlocks.HAND_CRANK)
-                .add(FactoryBlocks.GEARBOX)
-                .add(FactoryBlocks.CHAIN_DRIVE)
-                .add(FactoryBlocks.CONTAINER)
-                .add(FactoryBlocks.FUNNEL)
-                .add(FactoryBlocks.WORKBENCH)
-                .add(FactoryBlocks.BLUEPRINT_WORKBENCH)
+        this.tag(BlockTags.MINEABLE_WITH_AXE)
+                .add(FactoryBlockIds.WINDMILL)
+                .add(FactoryBlockIds.AXLE)
+                .add(FactoryBlockIds.AXLE_WITH_GEAR)
+                .add(FactoryBlockIds.AXLE_WITH_LARGE_GEAR)
+                .add(FactoryBlockIds.HAND_CRANK)
+                .add(FactoryBlockIds.GEARBOX)
+                .add(FactoryBlockIds.CHAIN_DRIVE)
+                .add(FactoryBlockIds.CONTAINER)
+                .add(FactoryBlockIds.FUNNEL)
+                .add(FactoryBlockIds.WORKBENCH)
+                .add(FactoryBlockIds.BLUEPRINT_WORKBENCH)
         ;
 
         this.builder(FactoryBlockTags.MINEABLE_WITH_DRILL)
@@ -186,17 +188,7 @@ class BlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
                 .addOptionalTag(BlockTags.MINEABLE_WITH_SHOVEL)
         ;
 
-        //this.valueLookupBuilder(BlockTags.WALLS)
-        //        .add(FactoryBlocks.WALL_WITH_CABLE.values().toArray(new Block[0]));
-
-        var conc = this.valueLookupBuilder(FactoryBlockTags.CONCRETE);
-
-        for (var block : BuiltInRegistries.BLOCK) {
-            var id = BuiltInRegistries.BLOCK.getKey(block);
-
-            if (id.getPath().endsWith("_concrete")) {
-                conc.add(block);
-            }
-        }
+        //this.tag(BlockTags.WALLS)
+        //        .add(FactoryBlockIds.WALL_WITH_CABLE.values().toArray(new Block[0]));
     }
 }

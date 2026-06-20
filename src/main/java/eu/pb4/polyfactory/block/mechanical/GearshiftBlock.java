@@ -89,7 +89,7 @@ public class GearshiftBlock extends ClutchBlock implements NetworkComponent.Rota
 
     @Override
     public BlockState getPolymerBreakEventBlockState(BlockState state, PacketContext context) {
-        return Blocks.COPPER_BLOCK.defaultBlockState();
+        return Blocks.COPPER_BLOCK.weathering().unaffected().defaultBlockState();
     }
 
     @Override

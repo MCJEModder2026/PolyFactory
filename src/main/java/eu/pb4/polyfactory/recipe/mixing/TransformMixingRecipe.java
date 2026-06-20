@@ -122,7 +122,7 @@ public record TransformMixingRecipe(String group, Ingredient base, List<CountedI
         var noBase = true;
         for (int i = MixerBlockEntity.INPUT_FIRST; i < MixerBlockEntity.OUTPUT_FIRST; i++) {
             var stack = inventory.getItem(i);
-            if (this.base.test(stack) && stack.getItem() != this.output.item()) {
+            if (this.base.test(stack) && stack.getItem() != this.output.item().value()) {
                 noBase = false;
                 break;
             }
@@ -181,7 +181,7 @@ public record TransformMixingRecipe(String group, Ingredient base, List<CountedI
 
         for (int i = MixerBlockEntity.INPUT_FIRST; i < MixerBlockEntity.OUTPUT_FIRST; i++) {
             var stack = inventory.getItem(i);
-            if (this.base.test(stack) && stack.getItem() != this.output.item()) {
+            if (this.base.test(stack) && stack.getItem() != this.output.item().value()) {
                 stack.shrink(1);
                 if (stack.isEmpty()) {
                     inventory.setItem(i, ItemStack.EMPTY);
@@ -228,7 +228,7 @@ public record TransformMixingRecipe(String group, Ingredient base, List<CountedI
     public ItemStack assemble(MixingInput inventory) {
         for (int i = MixerBlockEntity.INPUT_FIRST; i < MixerBlockEntity.OUTPUT_FIRST; i++) {
             var stack = inventory.getItem(i);
-            if (this.base.test(stack) && stack.getItem() != this.output.item()) {
+            if (this.base.test(stack) && stack.getItem() != this.output.item().value()) {
                 return TransmuteRecipe.createWithOriginalComponents(this.output, stack);
             }
         }

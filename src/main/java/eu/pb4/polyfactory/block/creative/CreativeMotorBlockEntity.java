@@ -9,12 +9,14 @@ import eu.pb4.polyfactory.ui.GuiUtils;
 import eu.pb4.sgui.api.gui.SimpleGui;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.scores.TeamColor;
 
 public class CreativeMotorBlockEntity extends LockableBlockEntity {
     private double speed;
@@ -78,8 +80,8 @@ public class CreativeMotorBlockEntity extends LockableBlockEntity {
         }
 
         private void updateNumbers() {
-            GuiUtils.drawFlatNumbers(this, 2, (int) CreativeMotorBlockEntity.this.speed, 5, ChatFormatting.DARK_GRAY.getColor(), false);
-            GuiUtils.drawFlatNumbers(this, 2 + 9 * 2, (int) CreativeMotorBlockEntity.this.stress, 5, CreativeMotorBlockEntity.this.stress < 0 ? ChatFormatting.DARK_RED.getColor() : ChatFormatting.DARK_GRAY.getColor(), false);
+            GuiUtils.drawFlatNumbers(this, 2, (int) CreativeMotorBlockEntity.this.speed, 5, TextColor.DARK_GRAY.getValue(), false);
+            GuiUtils.drawFlatNumbers(this, 2 + 9 * 2, (int) CreativeMotorBlockEntity.this.stress, 5, CreativeMotorBlockEntity.this.stress < 0 ? TextColor.DARK_RED.getValue() : TextColor.DARK_GRAY.getValue(), false);
         }
 
         @Override

@@ -108,7 +108,7 @@ public abstract class PipeBaseBlock extends NetworkBlock implements FactoryBlock
 
     @Override
     public BlockState getPolymerBreakEventBlockState(BlockState state, PacketContext context) {
-        return Blocks.COPPER_BLOCK.defaultBlockState();
+        return Blocks.COPPER_BLOCK.weathering().unaffected().defaultBlockState();
     }
 
     public static class PipeModel extends BlockModel {

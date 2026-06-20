@@ -166,7 +166,7 @@ public class WindmillBlockEntity extends BlockEntity {
     }
 
     public void handleWindChargeBonus(Vec3 center, float radius) {
-        var distance = Math.max(center.distanceTo(this.getBlockPos().getCenter()) / 5, 1);
+        var distance = Math.max(center.distanceTo(Vec3.atCenterOf(this.getBlockPos())) / 5, 1);
 
         this.windChargeBonus = (float) (radius * 12 / distance * this.getBlockState().getValue(WindmillBlock.SAIL_COUNT) / 8f);
         this.windChargeBonusTimer = (int) (radius * 200);

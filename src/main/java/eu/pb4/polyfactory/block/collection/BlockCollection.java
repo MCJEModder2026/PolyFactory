@@ -119,7 +119,7 @@ public class BlockCollection extends AbstractElement implements CollisionGetter 
         if (id != -1) {
             packetConsumer.accept(new ClientboundAddEntityPacket(id, UUID.randomUUID(),
                     pos.x, pos.y, pos.z, 0f, 0f,
-                    EntityType.BLOCK_DISPLAY, 0, Vec3.ZERO, 0d
+                    EntityTypes.BLOCK_DISPLAY, 0, Vec3.ZERO, 0d
             ));
 
             packetConsumer.accept(new ClientboundSetEntityDataPacket(id, List.of(
@@ -141,7 +141,7 @@ public class BlockCollection extends AbstractElement implements CollisionGetter 
             vec.set(x - this.centerX, y - this.centerY, z - this.centerZ).rotate(quaternion);
             packetConsumer.accept(new ClientboundAddEntityPacket(id, UUID.randomUUID(),
                     pos.x + vec.x, pos.y + vec.y - 0.5, pos.z + vec.z, 0f, 0f,
-                    EntityType.SHULKER, 0, Vec3.ZERO, 0d
+                    EntityTypes.SHULKER, 0, Vec3.ZERO, 0d
             ));
 
             packetConsumer.accept(new ClientboundSetEntityDataPacket(id, List.of(
@@ -150,7 +150,7 @@ public class BlockCollection extends AbstractElement implements CollisionGetter 
 
             packetConsumer.accept(new ClientboundAddEntityPacket(this.collisionBlockId2[i], UUID.randomUUID(),
                     pos.x + vec.x, pos.y + vec.y - 0.5, pos.z + vec.z, 0f, 0f,
-                    EntityType.BLOCK_DISPLAY, 0, Vec3.ZERO, 0d
+                    EntityTypes.BLOCK_DISPLAY, 0, Vec3.ZERO, 0d
             ));
 
             packetConsumer.accept(new ClientboundSetEntityDataPacket(this.collisionBlockId2[i], List.of(

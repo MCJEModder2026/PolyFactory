@@ -146,7 +146,7 @@ public class FactoryBlocks {
     public static final TinyPotatoSpringBlock TINY_POTATO_SPRING = register("tiny_potato_spring", settings -> new TinyPotatoSpringBlock(settings.strength(1).noOcclusion()));
     public static final TinyPotatoSpringBlock GOLDEN_TINY_POTATO_SPRING = register("golden_tiny_potato_spring", settings -> new TinyPotatoSpringBlock(settings.strength(2).noOcclusion()));
     public static final RotationalDebugBlock ROTATION_DEBUG = register("rot_debug", settings -> new RotationalDebugBlock(settings.noOcclusion().strength(-1, -1)));
-    public static final PipeBlock PIPE = register("pipe", BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK), settings -> new PipeBlock(settings.noOcclusion()));
+    public static final PipeBlock PIPE = register("pipe", BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK.weathering().unaffected()), settings -> new PipeBlock(settings.noOcclusion()));
     public static final FilteredPipeBlock FILTERED_PIPE = register("filtered_pipe", BlockBehaviour.Properties.ofFullCopy(PIPE), settings -> new FilteredPipeBlock(settings.noOcclusion()));
     public static final RedstoneValvePipeBlock REDSTONE_VALVE_PIPE = register("redstone_valve_pipe", BlockBehaviour.Properties.ofFullCopy(PIPE), settings -> new RedstoneValvePipeBlock(settings.noOcclusion()));
     public static final Map<Block, PipeInWallBlock> WALL_WITH_PIPE = PipeInWallBlock.MAP;
@@ -158,13 +158,13 @@ public class FactoryBlocks {
     public static final CastingTableBlock CASTING_TABLE = register("casting_table", BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON), CastingTableBlock::new);
     public static final CastingCauldronBlock CASTING_CAULDRON = register("casting_cauldron", BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON).overrideLootTable(Blocks.CAULDRON.getLootTable()), CastingCauldronBlock::new);
     public static final FaucetBlock FAUCET = register("faucet", BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON).sound(SoundType.COPPER), FaucetBlock::new);
-    public static final PumpBlock PUMP = register("pump", BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK), settings -> new PumpBlock(settings.noOcclusion()));
-    public static final NozzleBlock NOZZLE = register("nozzle", BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK), settings -> new NozzleBlock(settings.noOcclusion()));
-    public static final DrainBlock DRAIN = register("drain", BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK), settings -> new DrainBlock(settings.noOcclusion()));
-    public static final MDrainBlock MECHANICAL_DRAIN = register("mechanical_drain", BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK), settings -> new MDrainBlock(settings.noOcclusion()));
+    public static final PumpBlock PUMP = register("pump", BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK.weathering().unaffected()), settings -> new PumpBlock(settings.noOcclusion()));
+    public static final NozzleBlock NOZZLE = register("nozzle", BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK.weathering().unaffected()), settings -> new NozzleBlock(settings.noOcclusion()));
+    public static final DrainBlock DRAIN = register("drain", BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK.weathering().unaffected()), settings -> new DrainBlock(settings.noOcclusion()));
+    public static final MDrainBlock MECHANICAL_DRAIN = register("mechanical_drain", BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK.weathering().unaffected()), settings -> new MDrainBlock(settings.noOcclusion()));
     public static final MSpoutBlock MECHANICAL_SPOUT = register("mechanical_spout", BlockBehaviour.Properties.ofFullCopy(SPLITTER), settings -> new MSpoutBlock(settings.noOcclusion()));
     public static final CreativeDrainBlock CREATIVE_DRAIN = register("creative_drain", BlockBehaviour.Properties.ofFullCopy(DRAIN), settings -> new CreativeDrainBlock(settings.noLootTable().strength(-1)));
-    public static final FluidTankBlock FLUID_TANK = register("fluid_tank", BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK), settings -> new FluidTankBlock(settings.noOcclusion()));
+    public static final FluidTankBlock FLUID_TANK = register("fluid_tank", BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK.weathering().unaffected()), settings -> new FluidTankBlock(settings.noOcclusion()));
     public static final PortableFluidTankBlock PORTABLE_FLUID_TANK = register("portable_fluid_tank", settings -> new PortableFluidTankBlock(settings
             .mapColor(MapColor.COLOR_ORANGE).strength(2.0F).noOcclusion().sound(SoundType.COPPER).pushReaction(PushReaction.DESTROY)));
 

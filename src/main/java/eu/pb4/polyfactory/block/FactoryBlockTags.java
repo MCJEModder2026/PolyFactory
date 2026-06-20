@@ -3,6 +3,7 @@ package eu.pb4.polyfactory.block;
 import eu.pb4.polyfactory.ModInit;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BlockItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
@@ -14,7 +15,7 @@ public class FactoryBlockTags {
     public static final TagKey<Block> GRINDER_TOP_PLACEABLE = of("grinder/top_placeable");
     public static final TagKey<Block> WIND_PASSTHROUGH = of("wind_passthrough");
     public static final TagKey<Block> SPRAY_CAN_COLORABLE = of("spray_can_colorable");
-    public static final TagKey<Block> CONCRETE = of("concrete");
+    public static final TagKey<Block> CONCRETE = BlockItemTags.CONCRETE.block();
     public static final TagKey<Block> PIPE_CONNECTABLE = of("pipe_connectable");
     public static final TagKey<Block> UNCONNECTABLE = of("unconnectable");
     public static final TagKey<Block> MINEABLE_WITH_DRILL = of("mineable/drill");

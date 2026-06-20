@@ -3,6 +3,7 @@ package eu.pb4.polyfactory.entity;
 import eu.pb4.polyfactory.item.FactoryItems;
 import eu.pb4.polymer.core.api.entity.PolymerEntity;
 import eu.pb4.polymer.virtualentity.api.data.DisplayEntityData;
+import net.minecraft.world.entity.EntityTypes;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import net.fabricmc.fabric.api.networking.v1.context.PacketContext;
@@ -156,7 +157,7 @@ public class DynamiteEntity extends Projectile implements PolymerEntity {
 
     @Override
     public EntityType<?> getPolymerEntityType(PacketContext context) {
-        return EntityType.ITEM_DISPLAY;
+        return EntityTypes.ITEM_DISPLAY;
     }
 
     @Override

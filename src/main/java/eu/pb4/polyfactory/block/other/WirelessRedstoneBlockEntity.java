@@ -15,6 +15,7 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 
 @SuppressWarnings("UnstableApiUsage")
 public class WirelessRedstoneBlockEntity extends LockableBlockEntity implements BlockEntityExtraListener {
@@ -67,7 +68,7 @@ public class WirelessRedstoneBlockEntity extends LockableBlockEntity implements 
             return false;
         }
 
-        var delta = hit.getLocation().subtract(hit.getBlockPos().getCenter());
+        var delta = hit.getLocation().subtract(Vec3.atCenterOf(hit.getBlockPos()));
         boolean upper = hit.getDirection() == Direction.DOWN ? delta.z < 0 : hit.getDirection() == Direction.UP ? delta.z > 0 : delta.y > 0;
 
         var current = upper ? this.key1 : this.key2;

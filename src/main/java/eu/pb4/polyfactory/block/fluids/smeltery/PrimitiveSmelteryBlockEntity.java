@@ -22,7 +22,7 @@ import eu.pb4.polyfactory.util.inventory.MinimalSidedContainer;
 import eu.pb4.sgui.api.containerwrappers.slot.WrappingSlot;
 import eu.pb4.sgui.api.gui.SimpleGui;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
-import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;

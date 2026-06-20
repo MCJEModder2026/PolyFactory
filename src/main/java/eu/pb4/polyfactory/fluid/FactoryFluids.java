@@ -23,6 +23,7 @@ import net.minecraft.util.Unit;
 import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
@@ -39,7 +40,7 @@ import static eu.pb4.polyfactory.ModInit.id;
 public class FactoryFluids {
     public static final FluidType<Unit> WATER = register(Identifier.withDefaultNamespace("water"),
             FluidType.of().density(100).fluid(Fluids.WATER).color(0x385dc6).transparent()
-                    .particle(new ItemParticleOption(ParticleTypes.ITEM, Items.BLUE_STAINED_GLASS_PANE))
+                    .particle(new ItemParticleOption(ParticleTypes.ITEM, Items.STAINED_GLASS_PANE.blue()))
                     .shootingBehavior(ShootProjectileEntity.ofSplash(FactoryEntities.WATER_SPLASH, 10,300, FactorySoundEvents.FLUID_SHOOT_WATER))
                     .build());
     public static final FluidType<Unit> LAVA = register(Identifier.withDefaultNamespace("lava"),
@@ -128,7 +129,7 @@ public class FactoryFluids {
 
     public static final FluidType<Unit> SNOW = register(Identifier.withDefaultNamespace("snow"),
             FluidType.of().density(90).flowSpeedMultiplier(0.98).maxFlow(FluidConstants.BOTTLE * 4 / 5).heat(BlockHeat.SNOW)
-                    .shootingBehavior(ShootProjectileEntity.ofEntity(EntityType.SNOWBALL, 1, FluidConstants.BLOCK / 4 / 20 / 2,
+                    .shootingBehavior(ShootProjectileEntity.ofEntity(EntityTypes.SNOWBALL, 1, FluidConstants.BLOCK / 4 / 20 / 2,
                             1.7f, 0.5f, 0, 0.1f, BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.SNOWBALL_THROW)))
                     .texture(Identifier.withDefaultNamespace("block/powder_snow")).build());
     public static void register() {

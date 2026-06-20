@@ -92,14 +92,14 @@ public final class FluidWorldPushInteraction {
             var possibilities = FluidBehaviours.BLOCK_STATE_TO_FLUID_INSERT.get(pushedBlockState);
             if (possibilities != null) {
                 for (var insert : possibilities) {
-                    if (insert != null && container.canExtract(insert.getA(), true)) {
-                        var maxFlow = insert.getA().instance().getMaxFlow(world);
-                        var amount = Math.min(Math.min((long) (strength * maxFlow * insert.getA().instance().getFlowSpeedMultiplier(world)),
+                    if (insert != null && container.canExtract(insert.getFirst(), true)) {
+                        var maxFlow = insert.getFirst().instance().getMaxFlow(world);
+                        var amount = Math.min(Math.min((long) (strength * maxFlow * insert.getFirst().instance().getFlowSpeedMultiplier(world)),
                                 maxFlow), Math.min(this.maxPush(), maxLocalPush));
                         this.setPushOverflow(direction, this.getPushOverflow(direction) + amount);
-                        if (this.getPushOverflow(direction) >= insert.getA().amount()) {
-                            world.setBlockAndUpdate(mut, insert.getB());
-                            container.extract(insert.getA(), false);
+                        if (this.getPushOverflow(direction) >= insert.getFirst().amount()) {
+                            world.setBlockAndUpdate(mut, insert.getSecond());
+                            container.extract(insert.getFirst(), false);
                             this.setPushOverflow(direction, 0);
                             break;
                         }

@@ -29,8 +29,8 @@ public record SpoutMolds(Identifier name, Item clay, Item hardened, Item mold, T
     }
 
     public void createTag(ItemTagsProvider itemTagsProvider) {
-        itemTagsProvider.getOrCreateTagBuilder(tag).add(hardened, mold);
-        itemTagsProvider.getOrCreateTagBuilder(FactoryItemTags.MOLDS).addOptionalTag(tag);
-        itemTagsProvider.getOrCreateTagBuilder(FactoryItemTags.SHAPEABLE_CLAY_MOLDS).add(clay);
+        itemTagsProvider.tag(tag).add(hardened.builtInRegistryHolder().key(), mold.builtInRegistryHolder().key());
+        itemTagsProvider.tag(FactoryItemTags.MOLDS).addOptionalTag(tag);
+        itemTagsProvider.tag(FactoryItemTags.SHAPEABLE_CLAY_MOLDS).add(clay.builtInRegistryHolder().key());
     }
 }

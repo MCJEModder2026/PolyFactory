@@ -1,7 +1,7 @@
 package eu.pb4.polyfactory.datagen;
 
 import eu.pb4.polyfactory.fluid.FactoryFluidTags;
-import eu.pb4.polyfactory.fluid.FactoryFluids;
+import eu.pb4.polyfactory.fluid.FactoryFluidIds;
 import eu.pb4.polyfactory.fluid.FluidType;
 import eu.pb4.polyfactory.other.FactoryRegistries;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -9,26 +9,26 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import java.util.concurrent.CompletableFuture;
 
-class FluidTypeTagsProvider extends FabricTagsProvider.FabricIntrinsicHolderTagsProvider<FluidType<?>> {
+class FluidTypeTagsProvider extends FabricTagsProvider<FluidType<?>> {
     public FluidTypeTagsProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
-        super(output, FactoryRegistries.FLUID_TYPES_KEY, completableFuture, x -> FactoryRegistries.FLUID_TYPES.getResourceKey(x).orElseThrow());
+        super(output, FactoryRegistries.FLUID_TYPES_KEY, completableFuture);
     }
 
     @Override
     protected void addTags(HolderLookup.Provider arg) {
-        this.valueLookupBuilder(FactoryFluidTags.MOLTEN_METAL)
-                .add(FactoryFluids.IRON)
-                .add(FactoryFluids.GOLD)
-                .add(FactoryFluids.COPPER)
-                .add(FactoryFluids.STEEL)
+        this.tag(FactoryFluidTags.MOLTEN_METAL)
+                .add(FactoryFluidIds.IRON)
+                .add(FactoryFluidIds.GOLD)
+                .add(FactoryFluidIds.COPPER)
+                .add(FactoryFluidIds.STEEL)
         ;
 
-        this.valueLookupBuilder(FactoryFluidTags.USE_INGOTS_FOR_AMOUNT)
+        this.tag(FactoryFluidTags.USE_INGOTS_FOR_AMOUNT)
                 .addOptionalTag(FactoryFluidTags.MOLTEN_METAL);
 
-        this.valueLookupBuilder(FactoryFluidTags.SMELTERY_ALLOWED_FLUIDS)
+        this.tag(FactoryFluidTags.SMELTERY_ALLOWED_FLUIDS)
                 .addOptionalTag(FactoryFluidTags.MOLTEN_METAL)
-                .add(FactoryFluids.GLASS)
+                .add(FactoryFluidIds.GLASS)
         ;
     }
 }

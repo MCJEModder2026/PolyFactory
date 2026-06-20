@@ -152,7 +152,7 @@ public class PumpBlock extends PipeBaseBlock implements FactoryBlock, RotationUs
 
     @Override
     public BlockState getPolymerBreakEventBlockState(BlockState state, PacketContext context) {
-        return Blocks.COPPER_BLOCK.defaultBlockState();
+        return Blocks.COPPER_BLOCK.weathering().unaffected().defaultBlockState();
     }
 
     @Override

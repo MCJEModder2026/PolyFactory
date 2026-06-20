@@ -1,7 +1,7 @@
 package eu.pb4.polyfactory.ui;
 
 import eu.pb4.polyfactory.block.other.WorkbenchBlockEntity;
-import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.recipebook.ServerPlaceRecipe;
 import net.minecraft.server.level.ServerLevel;

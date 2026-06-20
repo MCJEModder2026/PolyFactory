@@ -74,7 +74,7 @@ public class FanBlockEntity extends BlockEntity {
                 var pSpeed = 0d;
 
                 if (airFluid.is(Fluids.EMPTY) && liquidFluid.is(FluidTags.WATER)) {
-                    effect = new ItemParticleOption(ParticleTypes.ITEM, Items.BLUE_STAINED_GLASS_PANE);
+                    effect = new ItemParticleOption(ParticleTypes.ITEM, Items.STAINED_GLASS_PANE.blue());
                     pSpeed = speed * 0.8f;
                 } else if (airFluid.is(Fluids.EMPTY) && liquidFluid.is(FluidTags.LAVA)) {
                     effect = ParticleTypes.FLAME;

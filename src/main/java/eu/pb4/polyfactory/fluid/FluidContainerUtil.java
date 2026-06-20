@@ -1,5 +1,6 @@
 package eu.pb4.polyfactory.fluid;
 
+import com.mojang.datafixers.util.Pair;
 import eu.pb4.polyfactory.item.FactoryDataComponents;
 import eu.pb4.polyfactory.item.component.FluidComponent;
 import eu.pb4.polyfactory.item.tool.UniversalFluidContainerItem;
@@ -13,7 +14,7 @@ import eu.pb4.sgui.api.elements.GuiElement;
 import eu.pb4.sgui.api.elements.SimpleGuiElement;
 import net.fabricmc.fabric.api.entity.FakePlayer;
 import net.minecraft.ChatFormatting;
-import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -21,7 +22,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.phys.Vec3;
@@ -38,7 +38,7 @@ public interface FluidContainerUtil {
     static void tick(FluidContainer container, ServerLevel world, Vec3 pos, float temperature, Consumer<ItemStack> stackConsumer) {
         var input = FluidContainerInput.of(container, temperature);
         var random = world.getRandom();
-        var list = new ArrayList<Tuple<ResourceKey<Recipe<?>>, List<ItemStack>>>();
+        var list = new ArrayList<Pair<ResourceKey<Recipe<?>>, List<ItemStack>>>();
         for (var entry : ((RecipeManagerAccessor) world.recipeAccess()).getRecipes().byType(FactoryRecipeTypes.FLUID_INTERACTION)) {
             var recipe = entry.value();
             if (!entry.value().matches(input, world)) {
@@ -84,12 +84,12 @@ public interface FluidContainerUtil {
                 }
             }
 
-            list.add(new Tuple<>(entry.id(), item));
+            list.add(new Pair<>(entry.id(), item));
         }
 
         if (!list.isEmpty() && FactoryUtil.getClosestPlayer(world, BlockPos.containing(pos), 16) instanceof ServerPlayer serverPlayer) {
             for (var entry : list) {
-                CriteriaTriggers.RECIPE_CRAFTED.trigger(serverPlayer, entry.getA(), entry.getB());
+                CriteriaTriggers.RECIPE_CRAFTED.trigger(serverPlayer, entry.getFirst(), entry.getSecond());
             }
         }
     }

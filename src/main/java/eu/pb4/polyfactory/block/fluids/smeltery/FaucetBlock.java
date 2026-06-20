@@ -195,7 +195,7 @@ public class FaucetBlock extends Block implements FactoryBlock, PolymerTexturedB
 
     @Override
     public BlockState getPolymerBreakEventBlockState(BlockState state, PacketContext context) {
-        return Blocks.COPPER_TRAPDOOR.defaultBlockState().setValue(TrapDoorBlock.FACING, state.getValue(FACING)).setValue(TrapDoorBlock.OPEN, true);
+        return Blocks.COPPER_TRAPDOOR.weathering().unaffected().defaultBlockState().setValue(TrapDoorBlock.FACING, state.getValue(FACING)).setValue(TrapDoorBlock.OPEN, true);
     }
 
     @Override

@@ -19,7 +19,7 @@ import eu.pb4.polyfactory.util.FactoryUtil;
 import eu.pb4.polymer.virtualentity.api.ElementHolder;
 import eu.pb4.polymer.virtualentity.api.elements.ItemDisplayElement;
 import net.fabricmc.fabric.api.entity.FakePlayer;
-import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -166,7 +166,7 @@ public class DrainBlock extends Block implements FactoryBlock, PipeConnectable, 
 
     @Override
     public BlockState getPolymerBreakEventBlockState(BlockState state, PacketContext context) {
-        return Blocks.COPPER_BLOCK.defaultBlockState();
+        return Blocks.COPPER_BLOCK.weathering().unaffected().defaultBlockState();
     }
 
     public static final class Model extends BlockModel {

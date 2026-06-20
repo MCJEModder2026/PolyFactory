@@ -53,6 +53,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.BlockEntityTypes;
 
 public class FactoryBlockEntities {
     public static final BlockEntityType<ConveyorBlockEntity> CONVEYOR = register("conveyor",
@@ -184,10 +185,7 @@ public class FactoryBlockEntities {
             FabricBlockEntityTypeBuilder.create(ItemPackerBlockEntity::new, FactoryBlocks.ITEM_PACKER));
 
     public static void register() {
-        var x = (BlockEntityTypeAccessor) BlockEntityType.HOPPER;
-        var set = ImmutableSet.<Block>builder();
-        set.addAll(x.polyfactory$getBlocks());
-        x.polyfactory$setBlocks(set.build());
+
     }
 
     public static <T extends BlockEntity> BlockEntityType<T> register(String path, FabricBlockEntityTypeBuilder<T> item) {

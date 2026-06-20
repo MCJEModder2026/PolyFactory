@@ -4,7 +4,7 @@ import eu.pb4.factorytools.api.item.FactoryBlockItem;
 import eu.pb4.polyfactory.block.fluids.transport.PipeInWallBlock;
 import eu.pb4.polyfactory.mixin.util.BlockItemAccessor;
 import eu.pb4.polymer.core.api.block.PolymerBlock;
-import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;

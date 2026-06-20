@@ -150,14 +150,14 @@ public final class FluidWorldPullInteraction {
             }
 
             var extract = FluidBehaviours.BLOCK_STATE_TO_FLUID_EXTRACT.get(pulledBlockState);
-            if (extract != null && container.canInsert(extract.getA(), true)) {
-                var maxFlow = extract.getA().instance().getMaxFlow(world);
-                var amount = Math.min(Math.min((long) (strength * maxFlow * extract.getA().instance().getFlowSpeedMultiplier(world)),
+            if (extract != null && container.canInsert(extract.getFirst(), true)) {
+                var maxFlow = extract.getFirst().instance().getMaxFlow(world);
+                var amount = Math.min(Math.min((long) (strength * maxFlow * extract.getFirst().instance().getFlowSpeedMultiplier(world)),
                         maxFlow), container.empty());
                 this.setPullOverflow(direction, this.getPullOverflow(direction) + amount);
-                if (this.getPullOverflow(direction) >= extract.getA().amount()) {
-                    world.setBlockAndUpdate(mut, extract.getB());
-                    container.insert(extract.getA(), false);
+                if (this.getPullOverflow(direction) >= extract.getFirst().amount()) {
+                    world.setBlockAndUpdate(mut, extract.getSecond());
+                    container.insert(extract.getFirst(), false);
                     this.setPullOverflow(direction, 0);
                 }
             }

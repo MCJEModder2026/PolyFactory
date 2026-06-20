@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.networking.v1.context.PacketContext;
 import java.util.Optional;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -67,6 +68,6 @@ public class MinecartWithBlocksEntity extends AbstractMinecart implements Polyme
 
     @Override
     public EntityType<?> getPolymerEntityType(PacketContext packetContext) {
-        return EntityType.FURNACE_MINECART;
+        return EntityTypes.FURNACE_MINECART;
     }
 }
